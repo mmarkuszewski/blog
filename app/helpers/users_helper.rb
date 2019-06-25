@@ -1,9 +1,7 @@
 module UsersHelper
-  def user_params
-    params.require(:user).permit(:name, :password, :password_confirmation)
-  end
-
-  def is_admin?(user)
-    user.role == 'admin'
+  def is_admin?
+    if User.exists?(session[:user_id])
+      User.find(session[:user_id]).role == 'admin'
+    end
   end
 end
