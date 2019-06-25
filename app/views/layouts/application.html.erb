@@ -11,6 +11,8 @@
 
   <body>
     <%= yield %>
-    <%= link_to "Logout!", logout_path %>
-  </body>
+    <% if is_logged? %>
+      <%= link_to "Logout!", logout_path %>
+    <% end %>
+    </body>
 </html>

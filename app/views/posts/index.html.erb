@@ -1,3 +1,10 @@
 <h1>
-  Main
+Post list
 </h1>
+
+<% @posts.each do |post| %>
+  <h3><%= post.title %></h3>
+  <p><%= post.content %></p>
+<% end %>
+
+<%= link_to "Create post", new_post_path %>
