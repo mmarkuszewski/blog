@@ -1,17 +1,21 @@
-<h1> Create post </h1>
+<div align="center">
 
-<div class="row">
-  <div class="col-3">
+  <h1> Create Post </h1>
+
+  <div class="col-4">
+
     <%= form_for(@post) do |f| %>
 
       <%= f.label :title %>
       <%= f.text_field :title, class: 'form-control' %>
 
       <%= f.label :content %>
-      <%= f.text_field :content, class: 'form-control' %>
+      <%= f.text_area :content, class: 'form-control', rows: '10', cols: '50' %>
 
       <%= f.submit "Create post", class: "btn btn-primary" %>
+
     <% end %>
 
   </div>
+
 </div>

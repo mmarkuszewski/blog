@@ -1,0 +1,6 @@
+$('a').bind('ajax:complete', function () {
+    if($("div#"+this.id).length)
+    {
+        $("div#" + this.id)[0].innerHTML = "<%= escape_javascript(render('comment_form')) %>";
+    }
+});

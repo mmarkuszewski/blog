@@ -6,8 +6,8 @@ Rails.application.routes.draw do
   get '/logout', to: 'sessions#destroy'
 
   get '/register', to: 'users#new'
-  resources :users, only: [:create]
-
+  resources :users, only: [:create, :edit, :update]
   resources :posts, only: [:new, :create, :edit, :update, :destroy, :show]
+  resources :comments, only: [:create, :edit, :update, :destroy]
 
 end

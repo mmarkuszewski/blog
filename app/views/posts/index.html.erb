@@ -1,17 +1,22 @@
-<% @posts.each do |post| %>
-  <!-- Blog Post -->
-  <div class="card mb-4">
-    <div class="card-body">
-      <h2 class="card-title"><%= post.title %></h2>
-      <p class="card-text"><%= post.content %></p>
-      <%= link_to "Read more", post_path(id: post.id), class: "btn btn-primary" %>
-<!--      <a href="#" class="btn btn-primary">Read More &rarr;</a>-->
-    </div>
-    <div class="card-footer text-muted">
-    </div>
-  </div>
-<% end %>
+<div class="container">
 
-<% if is_admin? %>
-<%= link_to "Create post", new_post_path, class: "btn btn-primary" %>
-<% end %>
+  <div class="col-10">
+
+    <% @posts.each do |post| %>
+
+      <!-- Blog Post -->
+      <div class="card mb-4">
+        <div class="card-body">
+          <h2 class="card-title"><%= post.title %></h2>
+          <p class="card-text"><%= post.content %></p>
+        </div>
+        <div class="card-footer text-muted">
+          <%= link_to "Read more", post_path(id: post.id), class: "btn btn-primary" %>
+        </div>
+      </div>
+
+    <% end %>
+
+  </div>
+
+</div>

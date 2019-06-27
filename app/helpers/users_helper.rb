@@ -4,4 +4,8 @@ module UsersHelper
       User.find(session[:user_id]).role == 'admin'
     end
   end
+
+  def get_user_by_id(id)
+    User.find(id)
+  end
 end

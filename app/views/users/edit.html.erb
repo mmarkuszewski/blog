@@ -1,13 +1,16 @@
 <div align="center">
 
-  <h1> Register </h1>
+  <h1> Change password </h1>
 
   <div class="col-4">
 
     <%= form_for(@user) do |f| %>
 
       <%= f.label :name %>
-      <%= f.text_field :name, class: 'form-control' %>
+      <%= f.text_field :name, readonly:true, class: 'form-control' %>
+
+      <%= f.label :old_password %>
+      <%= f.password_field :old_password, class: 'form-control' %>
 
       <%= f.label :password %>
       <%= f.password_field :password, class: 'form-control' %>
@@ -15,7 +18,8 @@
       <%= f.label :password_confirmation %>
       <%= f.password_field :password_confirmation , class: 'form-control' %>
 
-      <%= f.submit "Register", class: "btn btn-primary" %>
+
+      <%= f.submit "Edit", class: "btn btn-primary" %>
 
     <% end %>
 

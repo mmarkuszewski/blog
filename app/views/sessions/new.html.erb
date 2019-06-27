@@ -1,7 +1,9 @@
-<h1> Login </h1>
+<div align="center">
 
-<div class="row">
-  <div class="col-3">
+  <h1> Login </h1>
+
+  <div class="col-4">
+
     <%= form_for(:session) do |f| %>
 
       <%= f.label :name %>
@@ -11,8 +13,10 @@
       <%= f.password_field :password, class: 'form-control' %>
 
       <%= f.submit "Log in", class: "btn btn-primary" %>
-    <% end %>
+      <%= link_to "Register!", register_path, class: "btn btn-primary" %>
 
-    <%= link_to "Register!", register_path %>
+  <% end %>
+
   </div>
+
 </div>
