@@ -1,14 +1,21 @@
 class SessionsController < ApplicationController
 
   def new
+    @user = User.new
   end
 
   def create
-    user = User.find_by(name: params[:session][:name])
-    if user && user.authenticate(params[:session][:password])
-      login(user)
+    @user = User.find_by(name: params[:session][:name])
+    if !@user
+      @user = User.new
+      @user.errors.add(:User, "with this name doesn't exist")
+      return render 'new'
+    end
+    if @user.authenticate(params[:session][:password])
+      login(@user)
       redirect_to root_path
     else
+      @user.errors.add(:Wrong, "password")
       render 'new'
     end
   end
@@ -20,15 +27,10 @@ class SessionsController < ApplicationController
 
   def login(user)
     session[:user_id] = user.id
-    set_current_user(user)
   end
 
   def logout
     session.delete(:user_id)
-    @current_user = nil
   end
 
-  def set_current_user(user)
-    @current_user = user
-  end
 end

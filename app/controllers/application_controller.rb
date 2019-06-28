@@ -1,5 +1,6 @@
 class ApplicationController < ActionController::Base
 
+  #dodane dla cancancan
   def current_user
     if session.key?("user_id")
       User.find(session[:user_id])

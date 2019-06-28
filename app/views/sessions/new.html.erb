@@ -15,7 +15,9 @@
       <%= f.submit "Log in", class: "btn btn-primary" %>
       <%= link_to "Register!", register_path, class: "btn btn-primary" %>
 
-  <% end %>
+    <% end %>
+
+    <%= render partial: "shared/form_error_msg", locals: {obj: @user} %>
 
   </div>
 

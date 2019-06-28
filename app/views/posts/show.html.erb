@@ -23,11 +23,13 @@
             <div class="card-body">
               <%= form_for @post, url: comments_path(post_id: @post.id), :method => :post do |f| %>
                   <%= f.fields_for :comment do |f| %>
-                  <div class="form-group">
-                    <%= f.text_area :content, class: 'form-control', rows:"3" %>
-                  </div>
-                    <%= f.submit "Submit", class: "btn btn-primary" %>
+                    <div class="form-group">
+                      <%= f.text_area :content, class: 'form-control', rows:"3" %>
+                    </div>
+                      <%= f.submit "Submit", class: "btn btn-primary" %>
                   <% end %>
+                <%= render partial: "shared/form_error_msg", locals: {obj: @comment} %>
+
             <% end %>
             </div>
           </div>
@@ -48,7 +50,6 @@
             <% if can? :destroy, comment %>
               <%= link_to "Delete", comment_path(id: comment.id), :method => :delete , class: "btn btn-primary" %>
             <% end %>
-
           </div>
         <% end %>
 
