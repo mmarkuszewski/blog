@@ -12,11 +12,11 @@
         <!-- Post Content -->
         <p><%= simple_format(@post.content) %></p>
 
-        <% if is_admin? %>
+        <% if can? :edit, @post %>
           <%= link_to "Edit post", edit_post_path, class: "btn btn-primary" %>
         <% end %>
 
-        <% if is_logged? %>
+        <% if can? :create, Comment %>
           <!-- Comments Form -->
           <div class="card my-4">
             <h5 class="card-header">Leave a Comment:</h5>
@@ -41,12 +41,14 @@
               <h5 class="mt-0"><%= get_user_by_id(comment.user_id).name %></h5>
               <div id="comment<%= comment.id %>"><%= comment.content %></div>
             </div>
-            <% if is_logged? %>
-              <% if comment.user_id == current_user.id %>
-                <%= link_to "Edit", edit_comment_path(id: comment.id) , class: "btn btn-primary", remote: true, id: "comment"+comment.id.to_s %>
-                <%= link_to "Delete", comment_path(id: comment.id), :method => :delete , class: "btn btn-primary" %>
-              <% end %>
+
+            <% if can? :edit, comment %>
+              <%= link_to "Edit", edit_comment_path(id: comment.id) , class: "btn btn-primary", remote: true, id: "comment"+comment.id.to_s %>
             <% end %>
+            <% if can? :destroy, comment %>
+              <%= link_to "Delete", comment_path(id: comment.id), :method => :delete , class: "btn btn-primary" %>
+            <% end %>
+
           </div>
         <% end %>
 

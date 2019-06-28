@@ -4,4 +4,8 @@ class User < ApplicationRecord
   validates :password, length: { minimum: 6 }
   has_secure_password
   accepts_nested_attributes_for :comments
+
+  def is_admin?
+    self.role == 'admin'
+  end
 end
