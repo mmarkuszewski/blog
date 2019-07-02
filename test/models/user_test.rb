@@ -1,7 +1,12 @@
 require 'test_helper'
 
 class UserTest < ActiveSupport::TestCase
-  # test "the truth" do
-  #   assert true
-  # end
+
+  def setup
+    @admin = users(:admin)
+  end
+
+  test "admin" do
+    assert @admin.is_admin?
+  end
 end

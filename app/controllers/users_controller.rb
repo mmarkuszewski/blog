@@ -20,9 +20,15 @@ class UsersController < ApplicationController
 
   def update
     @user = User.find(params[:id])
-    if @user.authenticate(params[:user][:old_password]) && @user.update_attributes(user_params)
-      redirect_to root_url
+
+    if @user.authenticate(params[:user][:old_password])
+      if @user.update_attributes(user_params)
+        redirect_to root_url
+      else
+        return render 'edit'
+      end
     else
+      @user.errors.add(:Old, "password is wrong")
       render 'edit'
     end
   end
