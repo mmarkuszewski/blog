@@ -36,7 +36,7 @@ class CommentsController < ApplicationController
   end
 
   def comment_params
-    {user_id: session[:user_id], post_id: params[:post_id],content: params[:post][:comment][:content]}
+    {user_id: current_user.id, post_id: params[:post_id],content: params[:post][:comment][:content]}
   end
 
 end

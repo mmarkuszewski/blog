@@ -1,8 +1,8 @@
 require 'rails_helper'
-require 'support/spec_test_helper'
 
 RSpec.describe PostsController, type: :controller do
-  include SpecTestHelper
+  let(:admin) {create(:admin)}
+  let(:user) {create(:user)}
 
   describe 'GET #index' do
     let(:post) { create :post }
@@ -32,8 +32,7 @@ RSpec.describe PostsController, type: :controller do
   end
 
   describe 'GET #new' do
-    before {login_admin}
-    let(:post) { create :post }
+    before { sign_in admin }
     it 'should success and render to new page' do
       get :new
       expect(response).to have_http_status(200)
@@ -42,7 +41,7 @@ RSpec.describe PostsController, type: :controller do
   end
 
   describe 'GET #edit' do
-    before {login_admin}
+    before { sign_in admin }
     let(:post) { create :post }
     it 'should success and render to edit page' do
       get :edit, params: {id: post.id}
@@ -53,7 +52,7 @@ RSpec.describe PostsController, type: :controller do
 
   describe 'POST #create' do
     context "as admin" do
-      before { login_admin }
+      before { sign_in admin }
 
       it "create new post" do
         post :create, params: {post: {title: "title", content: "content"}}
@@ -71,9 +70,7 @@ RSpec.describe PostsController, type: :controller do
       end
     end
 
-    context "as user" do
-      before { login_user }
-
+    context "as user/guest" do
       it "redirect to main page" do
         post :create, params: {post: {title: "title", content: "content"}}
         expect(response).to redirect_to(root_url)
@@ -84,7 +81,7 @@ RSpec.describe PostsController, type: :controller do
   describe 'PATCH #update' do
     let(:post) { create :post }
     context "as admin" do
-      before { login_admin }
+      before { sign_in admin }
 
       it "update post" do
         patch :update, params: {id: post.id, post: {title: "edited", content: "content"}}
@@ -102,9 +99,7 @@ RSpec.describe PostsController, type: :controller do
       end
     end
 
-    context "as user" do
-      before { login_user }
-
+    context "as user/guest" do
       it "redirect to main page" do
         patch :update, params: {id: post.id, post: { title: "title", content: "content"}}
         expect(response).to redirect_to(root_url)
@@ -115,7 +110,7 @@ RSpec.describe PostsController, type: :controller do
   describe 'DELETE #destroy' do
     let(:post) { create :post }
     context "as admin" do
-      before { login_admin }
+      before { sign_in admin }
 
       it "delete post" do
         delete :destroy, params: { id: post.id }
@@ -128,9 +123,7 @@ RSpec.describe PostsController, type: :controller do
       end
     end
 
-    context "as user" do
-      before { login_user }
-
+    context "as user/guest" do
       it "redirect to main page" do
         delete :destroy, params: { id: post.id }
         expect(response).to redirect_to(root_url)

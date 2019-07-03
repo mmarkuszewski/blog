@@ -35,7 +35,10 @@ gem 'bcrypt', '~> 3.1.7'
 
 gem 'bootstrap', '~> 4.3.1'
 gem 'jquery-rails'
+
 gem 'cancancan', '~> 1.15'
+
+gem 'devise', '~> 4.2'
 
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.1.0', require: false

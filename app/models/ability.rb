@@ -18,7 +18,6 @@ class Ability
     if user.id
       can :create, Comment
       can [:update, :destroy], Comment, user_id: user.id
-      # can :edit, User, id: user.id
     end
   end
 end

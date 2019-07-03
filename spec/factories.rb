@@ -1,13 +1,15 @@
 FactoryBot.define do
   factory :admin, class: User do
-    name { "Captain" }
+    email { "admin@aaa.com" }
     password { "password" }
+    password_confirmation { "password" }
     role { "admin" }
   end
 
   factory :user, class: User do
-    name { "Captain" }
+    email { "user@a.com" }
     password { "password" }
+    password_confirmation { "password" }
     role { "user" }
   end
 
