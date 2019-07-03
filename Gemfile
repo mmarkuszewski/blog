@@ -39,6 +39,8 @@ gem 'jquery-rails'
 gem 'cancancan', '~> 1.15'
 
 gem 'devise', '~> 4.2'
+#zaawansowana edycja tekstu
+gem 'tinymce-rails', '~> 5.0.9'
 
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.1.0', require: false
