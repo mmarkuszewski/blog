@@ -1,10 +1,12 @@
 class CommentsController < ApplicationController
+  before_action :current_post
 
   def create
-    @comment = Comment.new(comment_params)
+    @comment = @post.comments.new(comment_params)
     if @comment.save
       redirect_to post_path(params[:post_id])
     else
+      #odwołanie do innego controlera, więc before_action tu nie zadziała
       @post = Post.find(params[:post_id])
       render template: 'posts/show'
     end
@@ -13,7 +15,6 @@ class CommentsController < ApplicationController
 
   def edit
     @comment = Comment.find(params[:id])
-
     respond_to do |f|
       f.html { redirect_to post_url }
       f.js
@@ -21,22 +22,21 @@ class CommentsController < ApplicationController
   end
 
   def update
-    @comment = Comment.find(params[:id])
-    post_id = @comment.post_id
+    @comment = @post.comments.find(params[:id])
     @comment.update_attributes(content: params[:comment][:content])
-    redirect_to post_path(post_id)
-
+    redirect_to post_path(@post.id)
   end
 
   def destroy
-    comment = Comment.find(params[:id])
-    post_id = comment.post_id
-    comment.destroy
-    redirect_to post_path(post_id)
+    Comment.find(params[:id]).destroy
+    redirect_to post_path(@post.id)
   end
 
   def comment_params
-    {user_id: current_user.id, post_id: params[:post_id],content: params[:post][:comment][:content]}
+    {user_id: current_user.id, content: params[:post][:comment][:content]}
   end
 
+  def current_post
+    @post ||= Post.find(params[:post_id])
+  end
 end

@@ -1,13 +1,17 @@
 <div class="container">
 
   <div class="col-10">
+    <%= will_paginate @posts %>
 
     <% @posts.each do |post| %>
 
       <!-- Blog Post -->
       <div class="card mb-4">
-        <div class="card-body">
+        <div class="card-body">app
           <h2 class="card-title"><%= post.title %></h2>
+          <% if post.picture %>
+            <%= image_tag post.picture_url, width: "100%" %>
+          <% end %>
           <p class="card-text"><%= post.content.html_safe %></p>
         </div>
         <div class="card-footer text-muted">

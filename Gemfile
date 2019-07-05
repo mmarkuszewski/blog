@@ -42,6 +42,10 @@ gem 'devise', '~> 4.2'
 #zaawansowana edycja tekstu
 gem 'tinymce-rails', '~> 5.0.9'
 
+gem 'will_paginate', '~> 3.1.0'
+
+gem "shrine", "~> 2.0"
+
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.1.0', require: false
 

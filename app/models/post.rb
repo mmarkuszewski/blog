@@ -1,4 +1,5 @@
 class Post < ApplicationRecord
+  include ImageUploader[:picture]
   has_many :comments
   validates :title, presence: true
   validates :content, presence: true

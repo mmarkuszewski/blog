@@ -2,7 +2,7 @@ class PostsController < ApplicationController
   load_and_authorize_resource
 
   def index
-    @posts = Post.all
+    @posts = Post.paginate(page: params[:page], per_page: 4)
   end
 
   def show
@@ -17,7 +17,7 @@ class PostsController < ApplicationController
   def create
     @post = Post.new(post_params)
 
-    if @post.save && @post.valid?
+    if @post.save
       redirect_to root_url
     else
       render 'new'
@@ -43,7 +43,8 @@ class PostsController < ApplicationController
   end
 
   def post_params
-    params.require(:post).permit(:title, :content)
+    params[:post][:picture].open
+    params.require(:post).permit(:title, :content, :picture)
   end
 
 end

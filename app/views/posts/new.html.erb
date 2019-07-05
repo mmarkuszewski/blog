@@ -13,6 +13,8 @@
         <%= f.label :content %>
         <%= f.text_area :content, class: 'form-control tinymce', rows: '15', cols: '100' %>
       </div>
+    <%= f.label :picture %>
+    <%= f.file_field :picture %>
       <%= f.submit "Create post", class: "btn btn-primary" %>
 
     <% end %>
