@@ -16,7 +16,7 @@
         <p><%= simple_format(@post.content) %></p>
 
         <% if can? :edit, @post %>
-          <%= link_to "Edit post", edit_post_path(@post.id), class: "btn btn-primary" %>
+          <%= link_to "Edit post", edit_admin_post_path(@post.id), class: "btn btn-primary" %>
         <% end %>
 
         <% if can? :create, Comment %>
