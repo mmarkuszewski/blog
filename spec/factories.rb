@@ -18,4 +18,8 @@ FactoryBot.define do
     content { "something" }
   end
 
+  factory :comment, class: Comment do
+    content { "something" }
+  end
+
 end
