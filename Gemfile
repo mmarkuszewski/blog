@@ -74,5 +74,9 @@ group :test do
 end
 #docker nie zawiera tzdata
 gem 'tzinfo-data', '~> 1.2017', '>= 1.2017.2'
-# Windows does not include zoneinfo files, so bundle the tzinfo-data gem
-# gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
+
+gem 'webpacker', '~> 4.0.7'
+gem 'foreman', '~> 0.64.0'
+
+#do wywalenia
+gem 'sqlite3', '~> 1.3', '>= 1.3.11'

@@ -4,23 +4,10 @@
     <%= will_paginate @posts %>
 
     <% @posts.each do |post| %>
-
-      <!-- Blog Post -->
-      <div class="card mb-4">
-        <div class="card-body">
-          <h2 class="card-title"><%= post.title %></h2>
-          <% if post.picture %>
-            <%= image_tag post.picture_url, width: "100%" %>
-          <% end %>
-          <p class="card-text"><%= post.content.html_safe %></p>
-        </div>
-        <div class="card-footer text-muted">
-          <%= link_to "Read more", post_path(id: post.id), class: "btn btn-primary" %>
-        </div>
-      </div>
-
+      <post :post="<%= post.to_json %>"></post>
     <% end %>
 
   </div>
 
 </div>
+
