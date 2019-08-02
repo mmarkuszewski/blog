@@ -80,3 +80,4 @@ gem 'foreman', '~> 0.64.0'
 
 #do wywalenia
 gem 'sqlite3', '~> 1.3', '>= 1.3.11'
+

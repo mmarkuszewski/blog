@@ -9,4 +9,10 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  def index
+    respond_to do |format|
+      format.html {render file: "layouts/application"}
+    end
+  end
+
 end

@@ -1,5 +1,5 @@
 FROM ubuntu:18.04
-RUN apt-get update && apt-get install -y vim nodejs g++ gcc autoconf automake bison libc6-dev libffi-dev libgdbm-dev libncurses5-dev libsqlite3-dev libtool libyaml-dev make pkg-config sqlite3 zlib1g-dev libgmp-dev libreadline-dev libssl-dev curl sudo gawk libpq-dev
+RUN apt-get update && apt-get install -y vim yarn nodejs g++ gcc autoconf automake bison libc6-dev libffi-dev libgdbm-dev libncurses5-dev libsqlite3-dev libtool libyaml-dev make pkg-config sqlite3 zlib1g-dev libgmp-dev libreadline-dev libssl-dev curl sudo gawk libpq-dev
 #tworzenie użytkownika
 RUN useradd -ms /bin/bash hosting &&  echo hosting:passwordhosting | chpasswd --crypt-method=SHA512 && adduser hosting sudo
 USER hosting
