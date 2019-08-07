@@ -10,26 +10,26 @@ module Admin
       @post = Post.new(post_params)
 
       if @post.save
-        redirect_to root_url
+        render json: @post, status: :created
       else
-        render 'new'
+        render json: @post.errors, status: :unprocessable_entity
       end
     end
 
     def edit
+      render json: @post
     end
 
     def update
       if @post.update_attributes(post_params)
-        redirect_to root_url
+        render json: @post, status: :created
       else
-        render 'edit'
+        render json: @post.errors, status: :unprocessable_entity
       end
     end
 
     def destroy
       Post.find(params[:id]).destroy
-      redirect_to root_url
     end
 
     def post_params

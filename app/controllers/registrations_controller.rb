@@ -1,6 +1,5 @@
-class SessionsController < Devise::SessionsController
-  #TODO: po wylogowaniu gdz nie jest sie zalogowanym nie otrzymuje tokena (byc moze abilities rozwiaze)
-  after_action :send_csrf_token, :response_with_user_abilities, :send_flash_msg
+class RegistrationsController < Devise::RegistrationsController
+  after_action :send_csrf_token, :send_flash_msg
   clear_respond_to
   respond_to :json
 

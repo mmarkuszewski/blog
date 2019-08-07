@@ -2,6 +2,12 @@
     <div>
         <div class="container">
             <div class="col-10">
+                <button @click="prevPage">
+                    Previous
+                </button>
+                <button @click="nextPage">
+                    Next
+                </button>
                 <!-- Blog Post -->
                 <div v-for="post in posts">
                     <div class="card mb-4">
@@ -25,24 +31,39 @@
 
 <script>
     import postMixin from '../../mixins/post_mixin'
+    import pagination from '../../mixins/pagination_mixin'
 
     export default {
-        mixins: [postMixin],
+        mixins: [postMixin, pagination],
         name: "posts",
         data() {
             return {
-                posts: []
+                posts: [],
             }
         },
         created() {
-                this.$axios.get('/posts.json')
-                    .then(response => {
-                        this.posts = response.data
-                    })
-                    .catch(e => {
-                        this.error.push(e)
-                    })
+            this.getPosts()
+        },
+        watch: {
+            pageNum: function(){
+                this.getPosts()
+            }
+        },
+        methods:{
+            getPosts: function(){
+                this.$axios.get('/posts.json', {
+                    params: {
+                        page: this.pageNum
+                    }
+                }).then(response => {
+                    this.posts = response.data
+                }).catch(e => {
+                    this.error.push(e)
+                })
+            }
+
         }
+
     }
 </script>
 

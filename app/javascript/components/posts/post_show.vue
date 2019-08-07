@@ -1,8 +1,7 @@
 <template>
 
     <div class="container">
-    {{post}}
-        {{comments}}
+
         <div class="row">
             <div class="col-lg-8">
                 <!-- Title -->
@@ -12,36 +11,26 @@
                 <!-- Post Content -->
                 <p>{{ post.content }}</p>
 
-                <% if can? :edit, @post %>
-                <%= link_to "Edit post", edit_admin_post_path(@post.id), class: "btn btn-primary" %>
-                <% end %>
-
-                <div v-for="comment in comments">
-                    <div class="media mb-4">
-                        <img class="d-flex mr-3 rounded-circle" src="http://placehold.it/50x50" alt="">
-                        <div class="media-body">
-                            <h5 class="mt-0">{{comment.user_id}}</h5>
-                            <div id="comment<%= comment.id %>">{{ comment.content }}</div>
-                        </div>
-
-                        <% if can? :edit, comment %>
-                        <%= link_to "Edit", edit_post_comment_path(id: comment.id, post_id: @post.id) , class: "btn btn-primary", remote: true, id: "comment"+comment.id.to_s %>
-                        <% end %>
-                        <% if can? :destroy, comment %>
-                        <%= link_to "Delete", post_comment_path(id: comment.id, post_id: @post.id), :method => :delete , class: "btn btn-primary" %>
-                        <% end %>
-                    </div>
+                <div v-if="$can('manage', 'Post')">
+                    <router-link class="btn btn-primary" href="" :to="{ name: 'edit_post' }">Edit</router-link>
                 </div>
+                <comment-create></comment-create>
+                <comments :comments="comments"></comments>
 
             </div>
         </div>
+
     </div>
 </template>
 
 <script>
     import postMixin from '../../mixins/post_mixin'
+    import Comments from '../comments/comment_index'
+    import CommentCreate from '../comments/comment_create'
+
 
     export default {
+        components: {Comments, CommentCreate},
         name: 'post',
         mixins: [postMixin],
         data() {
@@ -51,15 +40,14 @@
             }
         },
         created() {
+            // console.log(this.$can('destroy', 'Comment', { user_id:1 }))
+            console.log(this.$ability.rules)
             this.$axios.get('/posts/'+this.$route.params.id)
                 .then(response => {
                     this.post = response.data.post
                     this.comments = response.data.comments
                 })
-                .catch(e => {
-                    this.error.push(e)
-                })
-        }
+        },
     }
 
 </script>

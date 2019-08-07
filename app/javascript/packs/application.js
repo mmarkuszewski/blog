@@ -5,30 +5,29 @@ import App from '../components/app'
 import axios from 'axios';
 import router from './router'
 import Router from "vue-router";
+Vue.use(Router)
+
 import Vuex from 'vuex'
 Vue.use(Vuex)
-Vue.use(Router)
+
+import VueFlashMessage from 'vue-flash-message';
+require('vue-flash-message/dist/vue-flash-message.min.css');
+Vue.use(VueFlashMessage);
+
+import { store, ability } from './store'
+import { abilitiesPlugin } from '@casl/vue'
+Vue.use(abilitiesPlugin, ability)
+
+import { Can } from '@casl/vue'
+
+Vue.component('Can', Can)
 
 Vue.prototype.$axios = axios
 Vue.use(TurbolinksAdapter)
 Vue.config.productionTip = false
 
-const store = new Vuex.Store({
-    state: {
-        current_user: null
-    },
-    mutations: {
-        changeUser (state, user) {
-            state.current_user = user
-        }
-    }
-})
-
 
 document.addEventListener('turbolinks:load', () => {
-//     axios.defaults.headers.common['X-CSRF-Token'] = document
-//         .querySelector('meta[name="csrf-token"]')
-//         .getAttribute('content')
     axios.defaults.headers.common['Accept'] = 'application/json'
     const app = new Vue({
         el: '#app',

@@ -5,11 +5,9 @@ class CommentsController < ApplicationController
   def create
     @comment = @post.comments.new(comment_params)
     if @comment.save
-      redirect_to post_path(params[:post_id])
+      render json: @comment, status: :created
     else
-      #odwołanie do innego controlera, więc before_action tu nie zadziała
-      @post = Post.find(params[:post_id])
-      render template: 'posts/show'
+      render json: @comment.errors, status: :unprocessable_entity
     end
 
   end
