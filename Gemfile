@@ -42,7 +42,7 @@ gem 'tinymce-rails', '~> 5.0.9'
 
 gem 'will_paginate', '~> 3.1.0'
 
-gem "shrine", "~> 2.0"
+gem "shrine", "~> 3.3"
 #postgesql
 gem 'pg', '~> 0.18.4'
 
